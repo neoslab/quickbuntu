@@ -320,7 +320,31 @@ cd $HOME
 
 * * *
 
-## 24. Customize the Terminal (Zsh, Powerlevel10k, and Plugins)
+## 24. Install Cubic
+
+Cubic (Custom Ubuntu ISO Creator) is a powerful graphical tool that allows you to create fully customized Ubuntu installation images. It provides a controlled chroot environment where you can install or remove packages, modify system configurations, add scripts, customize the desktop, preload files, and apply branding before generating a new bootable ISO. This is particularly useful for building personalized distributions, offline installers, lab or classroom environments, recovery systems, or hardened security images. Cubic simplifies what would otherwise require complex manual ISO remastering steps, while still giving advanced users full control over the resulting system.
+
+```bash
+sudo add-apt-repository -y ppa:cubic-wizard/release
+sudo apt -y update && sudo apt -y install cubic
+```
+
+* * *
+
+## 25. Install VirtualBox
+
+VirtualBox is a widely used virtualization platform that allows you to run multiple operating systems simultaneously on the same machine. It is especially useful for testing distributions, running isolated development environments, experimenting with system configurations, or safely executing untrusted software. This installation includes the VirtualBox kernel modules via DKMS to ensure compatibility with future kernel updates. Since VirtualBox relies on its own virtualization engine, KVM must be disabled to avoid conflicts. The blacklist configuration ensures KVM modules are not loaded at boot, and a system reboot is required for the changes to take effect properly.
+
+```bash
+sudo apt -y install virtualbox virtualbox-dkms
+sudo apt -y install dkms linux-headers-$(uname -r)
+echo -e "blacklist kvm\nblacklist kvm_intel" | sudo tee /etc/modprobe.d/blacklist-kvm.conf
+sudo reboot now
+```
+
+* * *
+
+## 26. Customize the Terminal (Zsh, Powerlevel10k, and Plugins)
 
 A developer's terminal is a key productivity tool. This customization replaces the default Bash shell with **Zsh**, adds the **Oh My Zsh** framework, and enhances usability with features like autosuggestions and syntax highlighting. The **Powerlevel10k** theme adds a professional, informative prompt with Git, Python, and system status indicators. Together, these tweaks create a fast, elegant, and feature-rich command-line experience.
 
@@ -401,7 +425,7 @@ cd /root/
 
 * * *
 
-## 25. Configure Powerlevel10k
+## 27. Configure Powerlevel10k
 
 After installation, configure the **Powerlevel10k** theme to match your preferences. The configuration wizard lets you adjust icons, color schemes, segment styles, and prompt behavior. Taking the time to fine-tune this step enhances readability and helps organize command-line information efficiently.
 
@@ -411,7 +435,7 @@ p10k configure
 
 * * *
 
-## 26. Final System Update and Cleanup
+## 28. Final System Update and Cleanup
 
 To conclude, perform another full system update and cleanup. This ensures that all installed packages are up to date, redundant files are removed, and the system is left in a stable and optimized state. Running this command post-setup keeps the environment lean, secure, and ready for immediate use.
 
