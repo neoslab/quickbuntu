@@ -80,7 +80,7 @@ This step equips your system with a wide range of developer utilities and produc
 ```bash
 sudo apt -y install apt-transport-https build-essential ca-certificates curl deborphan dirb dnsenum easytag evolution evolution-ews exiftool ffmpeg \
 filezilla flatpak gimp git golang gnome-tweaks hashcat httrack hydra inkscape john kdenlive net-tools nikto nmap policykit-1 pkg-config protobuf-compiler \
-secure-delete shutter software-properties-common sqlitebrowser sqlmap subversion testssl.sh trash-cli wapiti wfuzz wget whatweb whois zsh
+secure-delete shutter software-properties-common sqlitebrowser sqlmap subversion testssl.sh tor trash-cli wapiti wfuzz wget whatweb whois zsh
 ```
 
 * * *
@@ -152,7 +152,33 @@ cd $HOME
 
 * * *
 
-## 13. Install Telegram Desktop
+## 13. Install Opera
+
+*** Description of +/-330 characters ***
+
+```bash
+cd /tmp/
+wget -O "opera.deb" "https://download5.operacdn.com/ftp/pub/opera/desktop/127.0.5778.14/linux/opera-stable_127.0.5778.14_amd64.deb"
+sudo dpkg -i /tmp/opera.deb
+cd $HOME
+```
+
+* * *
+
+## 14. Install Brave
+
+*** Description of +/-330 characters ***
+```bash
+cd /tmp/
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+sudo curl -fsSLo /etc/apt/sources.list.d/brave-browser-release.sources https://brave-browser-apt-release.s3.brave.com/brave-browser.sources
+sudo apt -y update && sudo apt -y install brave-browser
+cd $HOME
+```
+
+* * *
+
+## 15. Install Telegram Desktop
 
 **Telegram Desktop** is useful for communication, file sharing, and automation via bots. For developers, it provides an efficient channel for collaborating on projects or receiving real-time notifications from CI/CD pipelines or monitoring bots. Installing it manually ensures you always get the latest official release without waiting for repository updates.
 
@@ -167,7 +193,7 @@ cd $HOME
 
 * * *
 
-## 14. Install Tor Browser
+## 16. Install Tor Browser
 
 **Tor Browser** enhances your online privacy by routing traffic through a secure, distributed network. It's particularly useful for security researchers, ethical hackers, and developers who need to test websites under different anonymity conditions. This step installs the official Tor release and adds it as a desktop application for convenient launching.
 
@@ -185,7 +211,7 @@ cd $HOME
 
 * * *
 
-## 15. Install Visual Studio Code
+## 17. Install Visual Studio Code
 
 **VS Code** is a powerful, extensible IDE suitable for virtually any programming language. Its integrated Git support, extensions marketplace, and debugging capabilities make it a must-have for developers. Installing it directly from Microsoft's servers guarantees compatibility with new features and faster updates than Ubuntu's default repositories.
 
@@ -198,7 +224,7 @@ cd $HOME
 
 * * *
 
-## 16. Install KeePassXC
+## 18. Install KeePassXC
 
 **KeePassXC** is an open-source password manager that securely stores credentials in encrypted databases. For developers managing multiple environments, servers, and API keys, it offers an offline alternative to cloud-based password tools. Its cross-platform compatibility and browser integration make it a reliable daily security companion.
 
@@ -209,7 +235,7 @@ sudo apt -y update && sudo apt -y install keepassxc
 
 * * *
 
-## 17. Install ProtonVPN
+## 19. Install ProtonVPN
 
 ProtonVPN encrypts your internet connection, hides your IP address, and protects sensitive development traffic. It's especially useful when accessing public Wi-Fi, working remotely, or connecting to staging servers over insecure networks. This setup installs the official ProtonVPN client and verifies package integrity using SHA-256 checks.
 
@@ -224,7 +250,7 @@ cd $HOME
 
 * * *
 
-## 18. Install ProtonMail Bridge
+## 20. Install ProtonMail Bridge
 
 **ProtonMail Bridge** allows you to integrate ProtonMail with desktop clients like Thunderbird or Evolution. It creates a secure local encryption layer so your emails remain private while still accessible via standard IMAP/SMTP clients. This setup ensures encrypted email handling for developers working in privacy-sensitive environments.
 
@@ -237,7 +263,7 @@ cd $HOME
 
 * * *
 
-## 19. Install JetBrains Toolbox
+## 21. Install JetBrains Toolbox
 
 JetBrains Toolbox simplifies managing IDEs like IntelliJ IDEA, PyCharm, WebStorm, and CLion. Instead of downloading each IDE separately, the Toolbox provides one interface to install, update, and configure all JetBrains products. This step requires manual download but significantly improves long-term maintainability for multi-language development workflows.
 
@@ -256,7 +282,7 @@ cd $HOME
 
 * * *
 
-## 20. Install Gitkraken
+## 22. Install Gitkraken
 
 GitKraken is a modern, cross-platform Git client that simplifies version control with an intuitive graphical interface. It offers seamless GitHub, GitLab, and Bitbucket integration, built-in merge conflict resolution, commit graph visualization, and productivity tools that streamline code collaboration and repository management.
 
@@ -270,7 +296,7 @@ cd $HOME
 
 * * *
 
-## 21. Install Rclone and Rclone Browser
+## 23. Install Rclone and Rclone Browser
 
 **Rclone** is a command-line program that synchronizes files with over 40 cloud services, including Google Drive, Dropbox, and OneDrive. The **Rclone Browser** adds a graphical interface to simplify transfers and synchronization. Together, they offer developers an efficient way to back up code, synchronize configurations, or manage project data securely across devices.
 
@@ -284,7 +310,7 @@ cd $HOME
 
 * * *
 
-## 22. Install Discord Desktop
+## 24. Install Discord Desktop
 
 Discord Desktop is a powerful platform for real-time chat, voice communication, file exchange, and automation through bots. For developers, it serves as a central hub for team collaboration, live system alerts, and instant feedback from CI/CD workflows or monitoring tools. Installing it directly from the official source lets you access the newest features and security updates immediately, without relying on delayed third-party repositories.
 
@@ -297,7 +323,7 @@ cd $HOME
 
 * * *
 
-## 23. Clone Github Repositories
+## 25. Clone Github Repositories
 
 This step retrieves the Quickbuntu repositories from GitHub, which contains essential tools and scripts developed by NeosLab to automate and optimize Ubuntu setups.
 
@@ -320,7 +346,7 @@ cd $HOME
 
 * * *
 
-## 24. Install Cubic
+## 26. Install Cubic
 
 Cubic (Custom Ubuntu ISO Creator) is a powerful graphical tool that allows you to create fully customized Ubuntu installation images. It provides a controlled chroot environment where you can install or remove packages, modify system configurations, add scripts, customize the desktop, preload files, and apply branding before generating a new bootable ISO. This is particularly useful for building personalized distributions, offline installers, lab or classroom environments, recovery systems, or hardened security images. Cubic simplifies what would otherwise require complex manual ISO remastering steps, while still giving advanced users full control over the resulting system.
 
@@ -331,20 +357,22 @@ sudo apt -y update && sudo apt -y install cubic
 
 * * *
 
-## 25. Install VirtualBox
+## 27. Install VirtualBox
 
 VirtualBox is a widely used virtualization platform that allows you to run multiple operating systems simultaneously on the same machine. It is especially useful for testing distributions, running isolated development environments, experimenting with system configurations, or safely executing untrusted software. This installation includes the VirtualBox kernel modules via DKMS to ensure compatibility with future kernel updates. Since VirtualBox relies on its own virtualization engine, KVM must be disabled to avoid conflicts. The blacklist configuration ensures KVM modules are not loaded at boot, and a system reboot is required for the changes to take effect properly.
 
 ```bash
-sudo apt -y install virtualbox virtualbox-dkms
-sudo apt -y install dkms linux-headers-$(uname -r)
-echo -e "blacklist kvm\nblacklist kvm_intel" | sudo tee /etc/modprobe.d/blacklist-kvm.conf
+cd /tmp/
+wget https://download.virtualbox.org/virtualbox/7.2.6/virtualbox-7.2_7.2.6-172322~Ubuntu~noble_amd64.deb
+sudo dpkg -i virtualbox-7.2_7.2.6-172322~Ubuntu~noble_amd64.deb
+sudo apt -y -f install
+sudo /sbin/vboxconfig
 sudo reboot now
 ```
 
 * * *
 
-## 26. Customize the Terminal (Zsh, Powerlevel10k, and Plugins)
+## 28. Customize the Terminal (Zsh, Powerlevel10k, and Plugins)
 
 A developer's terminal is a key productivity tool. This customization replaces the default Bash shell with **Zsh**, adds the **Oh My Zsh** framework, and enhances usability with features like autosuggestions and syntax highlighting. The **Powerlevel10k** theme adds a professional, informative prompt with Git, Python, and system status indicators. Together, these tweaks create a fast, elegant, and feature-rich command-line experience.
 
@@ -425,7 +453,7 @@ cd /root/
 
 * * *
 
-## 27. Configure Powerlevel10k
+## 29. Configure Powerlevel10k
 
 After installation, configure the **Powerlevel10k** theme to match your preferences. The configuration wizard lets you adjust icons, color schemes, segment styles, and prompt behavior. Taking the time to fine-tune this step enhances readability and helps organize command-line information efficiently.
 
