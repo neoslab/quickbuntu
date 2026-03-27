@@ -79,8 +79,8 @@ This step equips your system with a wide range of developer utilities and produc
 
 ```bash
 sudo apt -y install apt-transport-https build-essential ca-certificates curl deborphan dirb dnsenum easytag evolution evolution-ews exiftool ffmpeg \
-filezilla flatpak gettext gimp git golang gnome-tweaks hashcat httrack hydra inkscape john kdenlive net-tools nikto nmap policykit-1 pkg-config protobuf-compiler \
-secure-delete shutter software-properties-common sqlitebrowser sqlmap subversion testssl.sh tor trash-cli wapiti wfuzz wget whatweb whois zsh
+filezilla flatpak gettext gimp git golang gnome-tweaks hashcat httrack hydra inkscape john kdenlive net-tools nikto nmap poedit policykit-1 pkg-config \
+protobuf-compiler secure-delete shutter software-properties-common sqlitebrowser sqlmap subversion testssl.sh tor trash-cli wapiti wfuzz wget whatweb whois zsh
 ```
 
 * * *
