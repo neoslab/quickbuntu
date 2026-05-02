@@ -372,7 +372,17 @@ sudo reboot now
 
 * * *
 
-## 28. Customize the Terminal (Zsh, Powerlevel10k, and Plugins)
+## 28. Fix thumbnails error
+
+On some Ubuntu 24.04 systems, thumbnails fail to generate in Nautilus due to AppArmor restrictions preventing user namespace usage. This command temporarily disables the AppArmor restriction for unprivileged user namespaces (which allows thumbnailers to work), clears the cached thumbnail failure logs, and restarts Nautilus to regenerate thumbnails properly. Note that the AppArmor setting reverts after reboot unless made permanent.
+
+```bash
+sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 && rm -rf ~/.cache/thumbnails/fail/* && nautilus -q
+```
+
+* * *
+
+## 29. Customize the Terminal (Zsh, Powerlevel10k, and Plugins)
 
 A developer's terminal is a key productivity tool. This customization replaces the default Bash shell with **Zsh**, adds the **Oh My Zsh** framework, and enhances usability with features like autosuggestions and syntax highlighting. The **Powerlevel10k** theme adds a professional, informative prompt with Git, Python, and system status indicators. Together, these tweaks create a fast, elegant, and feature-rich command-line experience.
 
