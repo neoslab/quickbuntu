@@ -1,0 +1,132 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Target architectures
+TARGET_ARCH="Architectures: amd64"
+
+# Opera keyring path
+OPERA_KEYRING="/usr/share/keyrings/opera-browser.gpg"
+
+# Opera signed by path
+OPERA_SIGNEDBY="Signed-By: $OPERA_KEYRING"
+
+# Opera key URL
+OPERA_KEY_URL="https://deb.opera.com/archive.key"
+
+# Opera sources path
+OPERA_FILE="/etc/apt/sources.list.d/opera-stable.sources"
+
+# Architecture files path
+ARCH_FILES=(
+    "/etc/apt/sources.list.d/google-chrome.sources"
+    "/etc/apt/sources.list.d/docker.sources"
+)
+
+# Define updated default value
+UPDATED=0
+
+# Prompt for sudo password upfront
+sudo -v
+
+# Fix architecture function
+archfix() 
+{
+    local file="$1"
+    [[ -f "$file" ]] || return 0
+
+    if ! grep -Fxq "$TARGET_ARCH" "$file";
+    then
+        if grep -q '^Types:' "$file";
+        then
+            sudo sed -i "/^Types:/a $TARGET_ARCH" "$file"
+        else
+            echo "$TARGET_ARCH" | sudo tee -a "$file" > /dev/null
+        fi
+
+        echo "Added '$TARGET_ARCH' to $file"
+        UPDATED=1
+    fi
+}
+
+# Opera signedby function
+operasignedby() 
+{
+
+    [[ -f "$OPERA_FILE" ]] || return 0
+
+    if grep -Eq '^Signed-By:[[:space:]]*$' "$OPERA_FILE";
+    then
+        sudo sed -i "s|^Signed-By:[[:space:]]*$|$OPERA_SIGNEDBY|" "$OPERA_FILE"
+        echo "Fixed empty Signed-By in $OPERA_FILE"
+        UPDATED=1
+    elif grep -q '^Signed-By:' "$OPERA_FILE";
+    then
+        if ! grep -Fxq "$OPERA_SIGNEDBY" "$OPERA_FILE";
+        then
+            sudo sed -i "s|^Signed-By:.*|$OPERA_SIGNEDBY|" "$OPERA_FILE"
+            echo "Updated Signed-By in $OPERA_FILE"
+            UPDATED=1
+        fi
+    else
+        sudo sed -i "/^Components:/a $OPERA_SIGNEDBY" "$OPERA_FILE"
+        echo "Added Signed-By to $OPERA_FILE"
+        UPDATED=1
+    fi
+}
+
+# Opera install key function
+operakeyring() 
+{
+
+    local install_key=0
+
+    if [[ ! -f "$OPERA_KEYRING" ]]; 
+    then
+        install_key=1
+
+    elif ! gpg --show-keys "$OPERA_KEYRING" 2>/dev/null | grep -q "11EE8C00B693A745"; 
+    then
+        install_key=1
+    fi
+
+    if [[ "$install_key" -eq 1 ]];
+    then
+        sudo mkdir -p /usr/share/keyrings
+        wget -qO- "$OPERA_KEY_URL" | gpg --dearmor | sudo tee "$OPERA_KEYRING" > /dev/null
+        sudo chmod 644 "$OPERA_KEYRING"
+        echo "Installed Opera signing key"
+        UPDATED=1
+    fi
+}
+
+# Execute maintenance function
+maintainer() 
+{
+    echo "Running system maintenance..."
+    sudo apt -y update
+    sudo apt -y upgrade
+    sudo apt -y dist-upgrade
+
+    sudo apt -y remove
+    sudo apt -y autoremove
+    sudo apt -y clean
+    sudo apt -y autoclean
+
+    # Only run if supported by current apt version
+    if apt --help 2>/dev/null | grep -q modernize-sources;
+    then
+        sudo apt -y modernize-sources
+    fi
+
+    echo "System maintenance completed"
+}
+
+for file in "${ARCH_FILES[@]}"; 
+do
+    archfix "$file"
+done
+
+operasignedby
+operakeyring
+maintainer

@@ -420,16 +420,28 @@ After installation, configure the **Powerlevel10k** theme to match your preferen
 p10k configure
 ```
 
+
+
+
+
+
+
+
+
+
+
+
 * * *
 
 ## 27. Final System Update and Cleanup
 
-To conclude, perform another full system update and cleanup. This ensures that all installed packages are up to date, redundant files are removed, and the system is left in a stable and optimized state. Running this command post-setup keeps the environment lean, secure, and ready for immediate use.
+To conclude, perform another full system update, cleanup and check if the sources can be optimized. This ensures that all installed packages are up to date, redundant files are removed, and the system is left in a stable and optimized state. Running this command post-setup keeps the environment lean, secure, and ready for immediate use.
 
 ```bash
 sudo apt -y update && sudo apt -y upgrade && sudo apt -y dist-upgrade
 sudo apt -y remove && sudo apt -y autoremove
 sudo apt -y clean && sudo apt -y autoclean
+sudo apt -y modernize-sources
 ```
 
 * * *
