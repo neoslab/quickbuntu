@@ -420,28 +420,18 @@ After installation, configure the **Powerlevel10k** theme to match your preferen
 p10k configure
 ```
 
-
-
-
-
-
-
-
-
-
-
-
 * * *
 
-## 27. Final System Update and Cleanup
+## 27. Install and execute `syscare` System Maintenance Utility
 
-To conclude, perform another full system update, cleanup and check if the sources can be optimized. This ensures that all installed packages are up to date, redundant files are removed, and the system is left in a stable and optimized state. Running this command post-setup keeps the environment lean, secure, and ready for immediate use.
+This command downloads and installs the `syscare` maintenance script system-wide into `/usr/local/bin`, making it globally executable from any terminal session. The script automates APT repository cleanup, architecture normalization, Opera repository fixes, package updates, upgrades, autoremove operations, cache cleanup, and optional source modernization for Debian and Ubuntu-based systems.
 
 ```bash
-sudo apt -y update && sudo apt -y upgrade && sudo apt -y dist-upgrade
-sudo apt -y remove && sudo apt -y autoremove
-sudo apt -y clean && sudo apt -y autoclean
-sudo apt -y modernize-sources
+cd /tmp/
+wget -qO- https://raw.githubusercontent.com/neoslab/quickbuntu/main/usr/local/bin/syscare | sudo tee /usr/local/bin/syscare > /dev/null
+sudo chmod 755 /usr/local/bin/syscare
+cd $HOME
+syscare
 ```
 
 * * *

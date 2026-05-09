@@ -101,7 +101,7 @@ operakeyring()
 }
 
 # Execute maintenance function
-maintainer() 
+systemrefresh() 
 {
     echo "Running system maintenance..."
     sudo apt -y update
@@ -129,4 +129,4 @@ done
 
 operasignedby
 operakeyring
-maintainer
+systemrefresh
