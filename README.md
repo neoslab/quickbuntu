@@ -304,8 +304,8 @@ This step retrieves the Quickbuntu repositories from GitHub, which contains esse
 
 ```bash
 cd /tmp/
-wget -O "blitzclean_5.0.0_all.deb" "https://github.com/neoslab/blitzclean/releases/download/v5.0.0/blitzclean_5.0.0_all.deb"
-sudo dpkg -i /tmp/blitzclean_5.0.0_all.deb
+wget -O "blitzclean_5.1.5_all.deb" "https://github.com/neoslab/blitzclean/releases/download/v5.1.5/blitzclean_5.1.5_all.deb"
+sudo dpkg -i /tmp/blitzclean_5.1.5_all.deb
 cd $HOME
 
 cd /tmp/
