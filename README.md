@@ -80,7 +80,7 @@ This step equips your system with a wide range of developer utilities and produc
 ```bash
 sudo apt -y install apt-transport-https build-essential ca-certificates curl dirb dnsenum easytag evolution evolution-ews exiftool ffmpeg filezilla flatpak gettext gimp git golang \
 gnome-tweaks hashcat httrack hydra inkscape john kdenlive keepassxc net-tools nikto nmap poedit pkg-config protobuf-compiler secure-delete shutter software-properties-common \
-software-properties-gtk sqlitebrowser sqlmap subversion synaptic testssl.sh tor trash-cli update-manager wapiti wfuzz wget whatweb whois zsh
+software-properties-gtk sqlitebrowser sqlmap subversion synaptic testssl.sh tor trash-cli ubuntu-restricted-extras update-manager vlc wapiti wfuzz wget whatweb whois zsh
 ```
 
 * * *
@@ -422,7 +422,7 @@ p10k configure
 
 * * *
 
-## 27. Install and execute `syscare` System Maintenance Utility
+## 27. Install `syscare` System Maintenance Utility
 
 This command downloads and installs the `syscare` maintenance script system-wide into `/usr/local/bin`, making it globally executable from any terminal session. The script automates APT repository cleanup, architecture normalization, Opera repository fixes, package updates, upgrades, autoremove operations, cache cleanup, and optional source modernization for Debian and Ubuntu-based systems.
 
@@ -431,7 +431,16 @@ cd /tmp/
 wget -qO- https://raw.githubusercontent.com/neoslab/quickbuntu/main/usr/local/bin/syscare | sudo tee /usr/local/bin/syscare > /dev/null
 sudo chmod 755 /usr/local/bin/syscare
 cd $HOME
-syscare
+```
+
+* * *
+
+## 28. Modify the login session resolution screen
+
+Copy the current user monitor configuration to the GDM3 login manager so the login screen uses the same screen resolution, layout, and display settings as the active desktop session. This command places the monitors.xml file into the GDM configuration directory, ensuring external monitors, scaling, and resolution preferences are correctly applied before login. Useful for fixing mismatched resolutions or multi-monitor issues on the login screen in Linux systems using GDM3.
+
+```bash
+sudo cp ~/.config/monitors.xml /var/lib/gdm3/seat0/config/
 ```
 
 * * *
