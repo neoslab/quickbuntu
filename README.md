@@ -80,7 +80,7 @@ This step equips your system with a wide range of developer utilities and produc
 ```bash
 sudo apt -y install apt-transport-https build-essential ca-certificates curl dirb dnsenum easytag evolution evolution-ews exiftool ffmpeg filezilla flatpak gettext gimp git golang \
 gnome-tweaks hashcat httrack hydra inkscape john kdenlive keepassxc net-tools nikto nmap poedit pkg-config protobuf-compiler secure-delete shutter software-properties-common \
-software-properties-gtk sqlitebrowser sqlmap subversion synaptic testssl.sh tor trash-cli ubuntu-restricted-extras update-manager vlc wapiti wfuzz wget whatweb whois zsh
+software-properties-gtk sqlitebrowser sqlmap subversion synaptic testssl.sh tor trash-cli ubuntu-restricted-extras update-manager virtualbox vlc wapiti wfuzz wget whatweb whois zsh
 ```
 
 * * *

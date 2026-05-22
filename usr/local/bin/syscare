@@ -12,7 +12,7 @@ OPERA_KEYRING="/usr/share/keyrings/opera-browser.gpg"
 OPERA_SIGNEDBY="Signed-By: $OPERA_KEYRING"
 
 # Opera key URL
-OPERA_KEY_URL="https://deb.opera.com/archive.key"
+OPERA_KEYURL="https://deb.opera.com/archive.key"
 
 # Opera sources path
 OPERA_FILE="/etc/apt/sources.list.d/opera-stable.sources"
@@ -30,7 +30,7 @@ UPDATED=0
 sudo -v
 
 # Fix architecture function
-archfix() 
+archfix()
 {
     local file="$1"
     [[ -f "$file" ]] || return 0
@@ -50,50 +50,71 @@ archfix()
 }
 
 # Opera signedby function
-operasignedby() 
+operasignedby()
 {
-
     [[ -f "$OPERA_FILE" ]] || return 0
 
-    if grep -Eq '^Signed-By:[[:space:]]*$' "$OPERA_FILE";
-    then
-        sudo sed -i "s|^Signed-By:[[:space:]]*$|$OPERA_SIGNEDBY|" "$OPERA_FILE"
-        echo "Fixed empty Signed-By in $OPERA_FILE"
+    # Create a temporary file
+    local tmpfile=$(mktemp)
+
+    # Remove duplicate entries and clean up the file
+    awk -v signedby="$OPERA_SIGNEDBY" '
+    BEGIN { RS=""; FS="\n"; ORS="\n\n" }
+    {
+        if (NF == 0) next
+
+        key = ""
+        for (i=1; i<=NF; i++) {
+            if ($i ~ /^(Types|URIs|Suites|Components):/) {
+                key = key $i "\n"
+            }
+        }
+
+        if (!seen[key]) {
+            seen[key] = 1
+            for (i=1; i<=NF; i++) {
+                if ($i ~ /^Signed-By:[[:space:]]*$/) {
+                    $i = "Signed-By: " signedby
+                }
+            }
+            print
+        }
+    }' "$OPERA_FILE" > "$tmpfile"
+
+    # Check if the cleaned content is different from original
+    if ! cmp -s "$OPERA_FILE" "$tmpfile"; then
+        sudo cp "$tmpfile" "$OPERA_FILE"
+        echo "Cleaned and fixed duplicate entries in $OPERA_FILE"
         UPDATED=1
-    elif grep -q '^Signed-By:' "$OPERA_FILE";
-    then
-        if ! grep -Fxq "$OPERA_SIGNEDBY" "$OPERA_FILE";
-        then
-            sudo sed -i "s|^Signed-By:.*|$OPERA_SIGNEDBY|" "$OPERA_FILE"
-            echo "Updated Signed-By in $OPERA_FILE"
+    else
+        # Even if no duplicates, check for empty Signed-By
+        if grep -Eq '^Signed-By:[[:space:]]*$' "$OPERA_FILE"; then
+            sudo sed -i "s|^Signed-By:[[:space:]]*$|$OPERA_SIGNEDBY|" "$OPERA_FILE"
+            echo "Fixed empty Signed-By in $OPERA_FILE"
             UPDATED=1
         fi
-    else
-        sudo sed -i "/^Components:/a $OPERA_SIGNEDBY" "$OPERA_FILE"
-        echo "Added Signed-By to $OPERA_FILE"
-        UPDATED=1
     fi
+
+    rm -f "$tmpfile"
 }
 
 # Opera install key function
-operakeyring() 
+operakeyring()
 {
+    local instkey=0
 
-    local install_key=0
-
-    if [[ ! -f "$OPERA_KEYRING" ]]; 
+    if [[ ! -f "$OPERA_KEYRING" ]];
     then
-        install_key=1
-
-    elif ! gpg --show-keys "$OPERA_KEYRING" 2>/dev/null | grep -q "11EE8C00B693A745"; 
+        instkey=1
+    elif ! gpg --show-keys "$OPERA_KEYRING" 2>/dev/null | grep -q "11EE8C00B693A745";
     then
-        install_key=1
+        instkey=1
     fi
 
-    if [[ "$install_key" -eq 1 ]];
+    if [[ "$instkey" -eq 1 ]];
     then
         sudo mkdir -p /usr/share/keyrings
-        wget -qO- "$OPERA_KEY_URL" | gpg --dearmor | sudo tee "$OPERA_KEYRING" > /dev/null
+        wget -qO- "$OPERA_KEYURL" | gpg --dearmor | sudo tee "$OPERA_KEYRING" > /dev/null
         sudo chmod 644 "$OPERA_KEYRING"
         echo "Installed Opera signing key"
         UPDATED=1
@@ -101,19 +122,16 @@ operakeyring()
 }
 
 # Execute maintenance function
-systemrefresh() 
+systemrefresh()
 {
     echo "Running system maintenance..."
     sudo apt -y update
     sudo apt -y upgrade
     sudo apt -y dist-upgrade
-
-    sudo apt -y remove
     sudo apt -y autoremove
     sudo apt -y clean
     sudo apt -y autoclean
 
-    # Only run if supported by current apt version
     if apt --help 2>/dev/null | grep -q modernize-sources;
     then
         sudo apt -y modernize-sources
@@ -122,7 +140,8 @@ systemrefresh()
     echo "System maintenance completed"
 }
 
-for file in "${ARCH_FILES[@]}"; 
+# Main execution
+for file in "${ARCH_FILES[@]}";
 do
     archfix "$file"
 done
@@ -130,3 +149,7 @@ done
 operasignedby
 operakeyring
 systemrefresh
+
+# Wait 2 second before exit
+echo "Script completed | Exiting in 2 second..."
+sleep 2
