@@ -78,14 +78,27 @@ sudo apt -y install fonts-dejavu fonts-powerline
 This step equips your system with a wide range of developer utilities and productivity tools. From compilers (`build-essential`) to network analysis utilities (`nmap`, `wfuzz`, `nikto`), this set ensures your workstation can handle web development, cybersecurity tasks, and general system maintenance. Having them pre-installed means less downtime when switching between project types or debugging different environments.
 
 ```bash
-sudo apt -y install apt-transport-https build-essential ca-certificates curl dirb dnsenum easytag evolution evolution-ews exiftool ffmpeg filezilla flatpak gettext gimp git golang \
-gnome-tweaks hashcat httrack hydra inkscape john kdenlive keepassxc net-tools nikto nmap poedit pkg-config protobuf-compiler secure-delete shutter software-properties-common \
-software-properties-gtk sqlitebrowser sqlmap subversion synaptic testssl.sh tor trash-cli ubuntu-restricted-extras update-manager virtualbox vlc wapiti wfuzz wget whatweb whois zsh
+sudo apt -y install apt-transport-https build-essential ca-certificates curl dirb dnsenum easytag evolution evolution-ews exiftool ffmpeg filezilla flatpak gettext gimp git golang gparted \
+hashcat httrack hydra inkscape john kdenlive keepassxc net-tools nikto nmap okular poedit pkg-config protobuf-compiler ruby-dev secure-delete shutter software-properties-common \
+software-properties-gtk sqlitebrowser sqlmap subversion synaptic terminator testssl.sh tor trash-cli ubuntu-restricted-extras update-manager virtualbox vlc wapiti wfuzz wget whatweb \
+whois wireshark zsh
+sudo usermod -aG wireshark $USER
+sudo setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
 ```
 
 * * *
 
-## 8. Install Python and Related Packages
+## 8. Install Gnome Utilities
+
+Install a collection of essential GNOME utilities that improve system monitoring, administration, customization, and everyday desktop usability. These tools provide graphical interfaces for managing disks and partitions, monitoring system resources and processes, customizing the GNOME desktop environment, checking weather forecasts, and performing common administrative tasks. Together, they offer a more complete and user-friendly experience for maintaining and optimizing a GNOME-based Linux system.
+
+```bash
+sudo apt -y install gnome-disk-utility gnome-system-monitor gnome-system-tools gnome-tweaks gnome-weather
+```
+
+* * *
+
+## 9. Install Python and Related Packages
 
 Python is essential for automation, data analysis, scripting, and backend web development. This step installs Python 3 along with scientific and web development libraries such as **NumPy**, **Flask**, **Pandas**, and **Matplotlib**. Symbolic links for `python` and `pip` are also added for command-line convenience, ensuring compatibility with older scripts expecting the `python` binary name.
 
@@ -99,7 +112,7 @@ sudo ln -s /usr/bin/pip3 /usr/local/bin/pip
 
 * * *
 
-## 9. Install Java Runtime and Development Kit
+## 10. Install Java Runtime and Development Kit
 
 Java remains a foundational technology for enterprise, Android, and cross-platform applications. Installing both **JRE (Java Runtime Environment)** and **JDK (Java Development Kit)** provides the ability to compile and run Java programs. Many IDEs, including JetBrains products, rely on these components to function properly.
 
@@ -109,7 +122,7 @@ sudo apt -y install default-jdk default-jre
 
 * * *
 
-## 10. Install Docker and Docker Compose
+## 11. Install Docker and Docker Compose
 
 Docker allows developers to create reproducible and isolated environments for applications. This installation enables containerized development, ensuring your code runs consistently across different systems. The included Docker Compose plugin simplifies orchestrating multi-container applications such as microservices or CI pipelines.
 
@@ -125,7 +138,7 @@ cd $HOME
 
 * * *
 
-## 11. Install Sublime Text
+## 12. Install Sublime Text
 
 **Sublime Text** is a lightweight yet powerful text editor favored for its speed and simplicity. It's ideal for editing configuration files, scripts, or quick code snippets without the overhead of a full IDE. The repository method ensures automatic updates and integration with your system's package manager.
 
@@ -139,7 +152,7 @@ cd $HOME
 
 * * *
 
-## 12. Install Google Chrome
+## 13. Install Google Chrome
 
 Installing Google Chrome gives you a reliable browser for web development and debugging. It supports modern web standards, developer tools, and extensions that simplify testing and profiling of websites or web applications. Having Chrome also ensures consistent behavior when testing projects destined for Chrome-based environments.
 
@@ -152,7 +165,7 @@ cd $HOME
 
 * * *
 
-## 13. Install Opera
+## 14. Install Opera
 
 *** Description of +/-330 characters ***
 
@@ -165,7 +178,7 @@ cd $HOME
 
 * * *
 
-## 14. Install Brave
+## 15. Install Brave
 
 *** Description of +/-330 characters ***
 ```bash
@@ -178,7 +191,7 @@ cd $HOME
 
 * * *
 
-## 15. Install Telegram Desktop
+## 16. Install Telegram Desktop
 
 **Telegram Desktop** is useful for communication, file sharing, and automation via bots. For developers, it provides an efficient channel for collaborating on projects or receiving real-time notifications from CI/CD pipelines or monitoring bots. Installing it manually ensures you always get the latest official release without waiting for repository updates.
 
@@ -193,7 +206,7 @@ cd $HOME
 
 * * *
 
-## 16. Install Tor Browser
+## 17. Install Tor Browser
 
 **Tor Browser** enhances your online privacy by routing traffic through a secure, distributed network. It's particularly useful for security researchers, ethical hackers, and developers who need to test websites under different anonymity conditions. This step installs the official Tor release and adds it as a desktop application for convenient launching.
 
@@ -211,7 +224,7 @@ cd $HOME
 
 * * *
 
-## 17. Install Visual Studio Code
+## 18. Install Visual Studio Code
 
 **VS Code** is a powerful, extensible IDE suitable for virtually any programming language. Its integrated Git support, extensions marketplace, and debugging capabilities make it a must-have for developers. Installing it directly from Microsoft's servers guarantees compatibility with new features and faster updates than Ubuntu's default repositories.
 
@@ -224,7 +237,7 @@ cd $HOME
 
 * * *
 
-## 18. Install ProtonVPN
+## 19. Install ProtonVPN
 
 ProtonVPN encrypts your internet connection, hides your IP address, and protects sensitive development traffic. It's especially useful when accessing public Wi-Fi, working remotely, or connecting to staging servers over insecure networks. This setup installs the official ProtonVPN client and verifies package integrity using SHA-256 checks.
 
@@ -239,7 +252,7 @@ cd $HOME
 
 * * *
 
-## 19. Install ProtonMail Bridge
+## 20. Install ProtonMail Bridge
 
 **ProtonMail Bridge** allows you to integrate ProtonMail with desktop clients like Thunderbird or Evolution. It creates a secure local encryption layer so your emails remain private while still accessible via standard IMAP/SMTP clients. This setup ensures encrypted email handling for developers working in privacy-sensitive environments.
 
@@ -252,7 +265,7 @@ cd $HOME
 
 * * *
 
-## 20. Install JetBrains Toolbox
+## 21. Install JetBrains Toolbox
 
 JetBrains Toolbox simplifies managing IDEs like IntelliJ IDEA, PyCharm, WebStorm, and CLion. Instead of downloading each IDE separately, the Toolbox provides one interface to install, update, and configure all JetBrains products. This step requires manual download but significantly improves long-term maintainability for multi-language development workflows.
 
@@ -271,7 +284,7 @@ cd $HOME
 
 * * *
 
-## 21. Install Rclone and Rclone Browser
+## 22. Install Rclone and Rclone Browser
 
 **Rclone** is a command-line program that synchronizes files with over 40 cloud services, including Google Drive, Dropbox, and OneDrive. The **Rclone Browser** adds a graphical interface to simplify transfers and synchronization. Together, they offer developers an efficient way to back up code, synchronize configurations, or manage project data securely across devices.
 
@@ -285,7 +298,7 @@ cd $HOME
 
 * * *
 
-## 22. Install Discord Desktop
+## 23. Install Discord Desktop
 
 Discord Desktop is a powerful platform for real-time chat, voice communication, file exchange, and automation through bots. For developers, it serves as a central hub for team collaboration, live system alerts, and instant feedback from CI/CD workflows or monitoring tools. Installing it directly from the official source lets you access the newest features and security updates immediately, without relying on delayed third-party repositories.
 
@@ -298,7 +311,7 @@ cd $HOME
 
 * * *
 
-## 23. Clone Github Repositories
+## 24. Clone Github Repositories
 
 This step retrieves the Quickbuntu repositories from GitHub, which contains essential tools and scripts developed by NeosLab to automate and optimize Ubuntu setups.
 
@@ -321,7 +334,7 @@ cd $HOME
 
 * * *
 
-## 24. Fix thumbnails error
+## 25. Fix thumbnails error
 
 On some Ubuntu 24.04 systems, thumbnails fail to generate in Nautilus due to AppArmor restrictions preventing user namespace usage. This command temporarily disables the AppArmor restriction for unprivileged user namespaces (which allows thumbnailers to work), clears the cached thumbnail failure logs, and restarts Nautilus to regenerate thumbnails properly. Note that the AppArmor setting reverts after reboot unless made permanent.
 
@@ -331,7 +344,7 @@ sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 && rm -rf ~/.cache
 
 * * *
 
-## 25. Customize the Terminal (Zsh, Powerlevel10k, and Plugins)
+## 26. Customize the Terminal (Zsh, Powerlevel10k, and Plugins)
 
 A developer's terminal is a key productivity tool. This customization replaces the default Bash shell with **Zsh**, adds the **Oh My Zsh** framework, and enhances usability with features like autosuggestions and syntax highlighting. The **Powerlevel10k** theme adds a professional, informative prompt with Git, Python, and system status indicators. Together, these tweaks create a fast, elegant, and feature-rich command-line experience.
 
@@ -412,7 +425,7 @@ cd /root/
 
 * * *
 
-## 26. Configure Powerlevel10k
+## 27. Configure Powerlevel10k
 
 After installation, configure the **Powerlevel10k** theme to match your preferences. The configuration wizard lets you adjust icons, color schemes, segment styles, and prompt behavior. Taking the time to fine-tune this step enhances readability and helps organize command-line information efficiently.
 
@@ -422,7 +435,21 @@ p10k configure
 
 * * *
 
-## 27. Install `syscare` System Maintenance Utility
+## 28. Install WPScanner
+
+Description of 450 characters
+
+```bash
+gem install wpscan
+echo '# WPScan fix' >> ~/.bashrc
+echo 'export PATH="$HOME/.local/share/gem/ruby/3.3.0/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+echo '# WPScan fix' >> ~/.zshrc
+echo 'export PATH="$HOME/.local/share/gem/ruby/3.3.0/bin:$PATH"' >> ~/.zshrc
+source ~/.zshrc
+```
+
+## 29. Install `syscare` System Maintenance Utility
 
 This command downloads and installs the `syscare` maintenance script system-wide into `/usr/local/bin`, making it globally executable from any terminal session. The script automates APT repository cleanup, architecture normalization, Opera repository fixes, package updates, upgrades, autoremove operations, cache cleanup, and optional source modernization for Debian and Ubuntu-based systems.
 
@@ -435,7 +462,7 @@ cd $HOME
 
 * * *
 
-## 28. Modify the login session resolution screen
+## 30. Modify the login session resolution screen
 
 Copy the current user monitor configuration to the GDM3 login manager so the login screen uses the same screen resolution, layout, and display settings as the active desktop session. This command places the monitors.xml file into the GDM configuration directory, ensuring external monitors, scaling, and resolution preferences are correctly applied before login. Useful for fixing mismatched resolutions or multi-monitor issues on the login screen in Linux systems using GDM3.
 
