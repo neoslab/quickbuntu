@@ -58,7 +58,7 @@ sudo snap remove --purge thunderbird
 These libraries provide the foundational components required to build, compile, and run modern software. Libraries like `libclang-dev`, `libssl-dev`, and `zlib1g-dev` are dependencies for compilers, encryption, and compression operations used in C/C++, Python, and Rust projects. Installing them early avoids compilation errors when setting up more advanced developer tools later.
 
 ```bash
-sudo apt -y install libclang-dev libffi-dev libfuse2 libgl1 libssl-dev libudev-dev libxcb-cursor0 libxkbcommon-x11-0 zlib1g-dev
+sudo apt -y install libclang-dev libffi-dev libfuse2 libgl1 libssl-dev libudev-dev libutempter0 libxcb-cursor0 libxkbcommon-x11-0 zlib1g-dev
 ```
 
 * * *
@@ -78,10 +78,10 @@ sudo apt -y install fonts-dejavu fonts-powerline
 This step equips your system with a wide range of developer utilities and productivity tools. From compilers (`build-essential`) to network analysis utilities (`nmap`, `wfuzz`, `nikto`), this set ensures your workstation can handle web development, cybersecurity tasks, and general system maintenance. Having them pre-installed means less downtime when switching between project types or debugging different environments.
 
 ```bash
-sudo apt -y install apt-transport-https build-essential ca-certificates curl dirb dnsenum easytag evolution evolution-ews exiftool ffmpeg filezilla flatpak gettext gimp git golang gparted \
-hashcat httrack hydra inkscape john kdenlive keepassxc net-tools nikto nmap okular poedit pkg-config protobuf-compiler ruby-dev secure-delete shutter software-properties-common \
-software-properties-gtk sqlitebrowser sqlmap subversion synaptic terminator testssl.sh tor trash-cli ubuntu-restricted-extras update-manager virtualbox vlc wapiti wfuzz wget whatweb \
-whois wireshark zsh
+sudo apt -y install apt-transport-https build-essential ca-certificates curl dirb dnsenum easyeffects easytag evolution evolution-ews exiftool ffmpeg filezilla flatpak gettext gimp \
+git golang gparted hashcat httrack hydra hyphen-pl inkscape john kdenlive keepassxc net-tools nikto nmap okular poedit pkg-config protobuf-compiler ruby-dev secure-delete shutter \
+software-properties-common software-properties-gtk sqlitebrowser sqlmap subversion synaptic terminator testssl.sh tor trash-cli ubuntu-restricted-extras update-manager virtualbox \
+vlc wapiti wfuzz wget whatweb whois wireshark xbitmaps xterm zsh
 sudo usermod -aG wireshark $USER
 sudo setcap 'CAP_NET_RAW+eip CAP_NET_ADMIN+eip' /usr/bin/dumpcap
 ```
@@ -167,11 +167,11 @@ cd $HOME
 
 ## 14. Install Opera
 
-*** Description of +/-330 characters ***
+Opera is a feature-rich web browser built on the Chromium engine, offering built-in privacy features like a free VPN, ad blocker, and battery saver. For developers, it includes robust developer tools, extension support, and unique workspace management options that help organize daily browsing and web testing tasks efficiently.
 
 ```bash
 cd /tmp/
-wget -O "opera.deb" "https://download3.operacdn.com/ftp/pub/opera/desktop/131.0.5877.5/linux/opera-stable_131.0.5877.5_amd64.deb"
+wget -O "opera.deb" "https://download3.operacdn.com/ftp/pub/opera/desktop/140.0.6074.18/linux/opera-stable_140.0.6074.18_amd64.deb"
 sudo dpkg -i /tmp/opera.deb
 cd $HOME
 ```
@@ -180,7 +180,8 @@ cd $HOME
 
 ## 15. Install Brave
 
-*** Description of +/-330 characters ***
+Brave is a fast, privacy-focused web browser built on Chromium that automatically blocks intrusive ads, trackers, and scripts by default. It provides developers with a secure environment for testing modern web applications, optimizing page load speeds, and ensuring user privacy during everyday browsing and web development tasks.
+
 ```bash
 cd /tmp/
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
@@ -212,8 +213,8 @@ cd $HOME
 
 ```bash
 cd /tmp/
-wget -O "tor-browser-linux-x86_64-15.0.11.tar.xz" "https://www.torproject.org/dist/torbrowser/15.0.11/tor-browser-linux-x86_64-15.0.11.tar.xz"
-tar -xf /tmp/tor-browser-linux-x86_64-15.0.11.tar.xz
+wget -O "tor-browser-linux-x86_64-16.0.1.tar.xz" "https://dist.torproject.org/torbrowser/16.0.1/tor-browser-linux-x86_64-16.0.1.tar.xz"
+tar -xf /tmp/tor-browser-linux-x86_64-16.0.1.tar.xz
 mv /tmp/tor-browser $HOME/.local/share/tor-browser
 cd $HOME/.local/share/tor-browser/
 ./start-tor-browser.desktop &> /dev/null &
@@ -243,9 +244,9 @@ ProtonVPN encrypts your internet connection, hides your IP address, and protects
 
 ```bash
 cd /tmp/
-wget -O "protonvpn-stable-release_1.0.8_all.deb" "https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb"
-sudo dpkg -i /tmp/protonvpn-stable-release_1.0.8_all.deb && sudo apt -y update
-echo "0b14e71586b22e498eb20926c48c7b434b751149b1f2af9902ef1cfe6b03e180 protonvpn-stable-release_1.0.8_all.deb" | sha256sum --check -
+wget -O "protonvpn-stable-release_1.0.10_all.deb" "https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.10_all.deb"
+sudo dpkg -i /tmp/protonvpn-stable-release_1.0.10_all.deb && sudo apt -y update
+echo "c8a9fffb4ebdd63db08ce7f11c9b0ac394064ae6a210feb9ab63a0f7d8d060a7 protonvpn-stable-release_1.0.10_all.deb" | sha256sum --check -
 sudo apt -y install proton-vpn-gnome-desktop
 cd $HOME
 ```
@@ -258,8 +259,8 @@ cd $HOME
 
 ```bash
 cd /tmp/
-wget -O "protonmail-bridge_3.24.2-1_amd64.deb" "https://proton.me/download/bridge/protonmail-bridge_3.24.2-1_amd64.deb"
-sudo dpkg -i /tmp/protonmail-bridge_3.24.2-1_amd64.deb
+wget -O "protonmail-bridge_amd64.deb" "https://proton.me/download/bridge/protonmail-bridge_amd64.deb"
+sudo dpkg -i /tmp/protonmail-bridge_amd64.deb
 cd $HOME
 ```
 
@@ -317,13 +318,13 @@ This step retrieves the Quickbuntu repositories from GitHub, which contains esse
 
 ```bash
 cd /tmp/
-wget -O "blitzclean_5.1.5_all.deb" "https://github.com/neoslab/blitzclean/releases/download/v5.1.5/blitzclean_5.1.5_all.deb"
-sudo dpkg -i /tmp/blitzclean_5.1.5_all.deb
+wget -O "blitzclean_5.2.0_all.deb" "https://github.com/neoslab/blitzclean/releases/download/v5.2.0/blitzclean_5.2.0_all.deb"
+sudo dpkg -i /tmp/blitzclean_5.2.0_all.deb
 cd $HOME
 
 cd /tmp/
-wget -O "mediasane_1.1.8_all.deb" "https://github.com/neoslab/mediasane/releases/download/v1.1.8/mediasane_1.1.8_all.deb"
-sudo dpkg -i /tmp/mediasane_1.1.8_all.deb
+wget -O "mediasane_1.2.6_all.deb" "https://github.com/neoslab/mediasane/releases/download/v1.2.6/mediasane_1.2.6_all.deb"
+sudo dpkg -i /tmp/mediasane_1.2.6_all.deb
 cd $HOME
 
 cd /tmp/
@@ -437,7 +438,7 @@ p10k configure
 
 ## 28. Install WPScanner
 
-Description of 450 characters
+WPScan is a black-box WordPress vulnerability scanner used by security professionals and web developers to assess the security posture of WordPress websites. It identifies known security flaws in core files, installed plugins, and themes, helping you detect vulnerabilities and properly harden your sites against potential attacks.
 
 ```bash
 gem install wpscan
